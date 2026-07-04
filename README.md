@@ -44,7 +44,7 @@ uv pip install pdfkit python-docx markdown
 
 # Configure Environment Variables
 cp .env.example .env
-# Add your HF_TOKEN, GOOGLE_API_KEY, and GOOGLE_CX_ID to the .env file
+# Add your HF_TOKEN, TAVILY_SEARCH_API, GOOGLE_API_KEY, and GOOGLE_CX_ID to the .env file
 
 # Launch the FastAPI Server
 uvicorn main:app --reload --port 8000
