@@ -2,7 +2,7 @@
 
 ARIA is an advanced, multi-stage autonomous AI agent designed to generate highly structured, 3000+ word institutional-grade research reports. It dynamically plans execution paths, scrapes the live web using bot-resistant metasearch engines, ranks extracted data via local vector embeddings, and streams the synthesized analysis back to a highly responsive React frontend.
 
-It is specifically engineered to run efficiently in memory-constrained environments (e.g., 4GB VRAM) by offloading cognitive heavy-lifting to `Llama-3.3-70B-Versatile` while strictly managing vector duplication and data sanitization locally.
+It is specifically engineered to run efficiently in memory-constrained environments (e.g., 4GB VRAM) by offloading cognitive heavy-lifting to `Llama-3.3-70B-Instruct` while strictly managing vector duplication and data sanitization locally.
 
 ## 🚀 Core Architecture
 
@@ -15,7 +15,7 @@ It is specifically engineered to run efficiently in memory-constrained environme
 
 * **Frontend:** React, Vite, Framer Motion, Tailwind CSS
 * **Backend:** FastAPI, Python, Server-Sent Events (SSE)
-* **Agent Engine:** `Llama-3.3-70B-Versatile` (via OpenRouter/HF)
+* **Agent Engine:** `Llama-3.3-70B-Instruct` (via HF)
 * **Vector Database:** ChromaDB (Local)
 * **Web Scraping:** SearXNG (Docker), BeautifulSoup4
 * **Package Management:** `uv` (Strictly enforced for blazing-fast backend dependency resolution)
