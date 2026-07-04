@@ -1,0 +1,17 @@
+# Environments
+.venv/
+__pycache__/
+
+# Secrets
+.env
+
+# Databases & Vector Stores
+backend/aria_agent.db
+backend/chroma_db/
+backend/live_session_memory/
+backend/internal_knowledge/
+
+# Node Modules
+node_modules/
+dist/
+.DS_Store

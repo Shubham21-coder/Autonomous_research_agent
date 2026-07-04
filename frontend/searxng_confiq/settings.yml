@@ -1,0 +1,8 @@
+search:
+  formats:
+    - html
+    - json
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "aria_secure_key_123" # Required for SearXNG to boot
