@@ -28,3 +28,31 @@ You must spin up the local SearXNG instance to enable deep web scraping without 
 ```bash
 # Ensure Docker is running
 docker-compose up -d
+
+cd backend
+
+# Create and activate a virtual environment
+uv venv
+source .venv/Scripts/activate  # Windows
+# source .venv/bin/activate    # Linux/Mac
+
+# Install dependencies
+uv pip install -r requirements.txt
+
+# Install export dependencies (wkhtmltopdf must be installed on your OS)
+uv pip install pdfkit python-docx markdown
+
+# Configure Environment Variables
+cp .env.example .env
+# Add your HF_TOKEN, GOOGLE_API_KEY, and GOOGLE_CX_ID to the .env file
+
+# Launch the FastAPI Server
+uvicorn main:app --reload --port 8000
+
+cd frontend
+
+# Install dependencies
+npm install
+
+# Launch the Vite development server
+npm run dev
