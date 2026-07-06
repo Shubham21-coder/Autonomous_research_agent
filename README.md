@@ -6,53 +6,50 @@ It is specifically engineered to run efficiently in memory-constrained environme
 
 ## 🚀 Core Architecture
 
-* **Planner Node:** Analyzes user intent and generates dynamic JSON routing arrays to direct web scraping.
+* **Planner Node:** Analyzes user intent and generates dynamic JSON routing arrays (Google API, Fallback Search, or Deep Web Scrape) with conversational memory injected from an SQLite database.
 * **Deep Search & Metasearch:** Integrates with a localized Dockerized SearXNG instance to bypass commercial API rate limits and scrape raw HTML, automatically stripping boilerplate.
-* **Vector Ranking Engine:** Chunks raw data and cryptographically hashes it (SHA-256) to prevent local ChromaDB bloating, filtering context based on user-preference weights.
-* **Synthesis & Verification Engine:** Streams real-time Server-Sent Events (SSE) back to the UI, synthesizing multi-page reports and executing a strict fact-checking audit against the localized context.
+* **Vector Ranking Engine:** Chunks raw data and cryptographically hashes it (SHA-256) to prevent local ChromaDB bloating, filtering context based on user-preference weights driven by an ML feedback loop.
+* **Synthesis & Export Engine:** Streams real-time Server-Sent Events (SSE) back to the UI, synthesizing multi-page reports with a strict fact-checking audit. Exports directly to `.PDF`, `.DOCX`, or `.TXT`.
 
 ## 🛠️ Technology Stack
 
 * **Frontend:** React, Vite, Framer Motion, Tailwind CSS
 * **Backend:** FastAPI, Python, Server-Sent Events (SSE)
-* **Agent Engine:** `Llama-3.3-70B-Instruct` (via HF)
+* **Agent Engine:** `Llama-3.3-70B-Versatile` (via HF)
 * **Vector Database:** ChromaDB (Local)
 * **Web Scraping:** SearXNG (Docker), BeautifulSoup4
-* **Package Management:** `uv` (Strictly enforced for blazing-fast backend dependency resolution)
-* **Export Generation:** `pdfkit`, `python-docx`
+* **Package Management:** `uv` (Strictly enforced for fast backend dependency resolution)
 
-## ⚙️ Installation & Setup
+---
 
-### 1. Local Metasearch Engine (SearXNG)
-You must spin up the local SearXNG instance to enable deep web scraping without API limits.
-```bash
-# Ensure Docker is running
-docker-compose up -d
+## ⚙️ Automated Installation & Setup
 
-cd backend
+**Prerequisites:** You must have `uv`, `Node.js`, and **Docker Desktop** installed. 
+> ⚠️ **IMPORTANT:** Docker Desktop MUST be actively running in the background before you execute the setup script.
 
-# Create and activate a virtual environment
-uv venv
-source .venv/Scripts/activate  # Windows
-# source .venv/bin/activate    # Linux/Mac
+### For Windows Users
+We have bundled an automated setup script that verifies your Docker status, generates a secure `.env` template, and boots both the frontend and backend servers.
 
-# Install dependencies
-uv pip install -r requirements.txt
+Simply double-click `start.bat` in the project root, or run it from your terminal:
+\`\`\`cmd
+.\start.bat
+\`\`\`
+*Note: On your first run, the script will generate a `backend/.env` file and pause. Open that file, add your API keys (HuggingFace/OpenRouter, Tavily, Google), and then run the script again.*
 
-# Install export dependencies (wkhtmltopdf must be installed on your OS)
-uv pip install pdfkit python-docx markdown
+### For Mac/Linux Users
+Execute the bash script from your terminal to automate the entire stack rollout:
+\`\`\`bash
+chmod +x start.sh
+./start.sh
+\`\`\`
 
-# Configure Environment Variables
-cp .env.example .env
-# Add your HF_TOKEN, TAVILY_SEARCH_API, GOOGLE_API_KEY, and GOOGLE_CX_ID to the .env file
+---
 
-# Launch the FastAPI Server
-uvicorn main:app --reload --port 8000
+## 🔐 Security Warning
+This repository is configured with a strict `.gitignore`. **Never** commit your `.env` file, `uv.lock`, or your local `aria_agent.db` SQLite/ChromaDB instances to version control, as they contain highly sensitive API keys and session memory.
 
-cd frontend
-
-# Install dependencies
-npm install
-
-# Launch the Vite development server
-npm run dev
+## 📝 Usage
+1. Authenticate via the UI (Top Right Account Button) to establish a secure session token.
+2. Enter a complex research query in the dashboard.
+3. Monitor the visual pipeline as ARIA plans, deeply scrapes the DOM, embeds vectors, and streams the final synthesis.
+4. Export the final validated audit via the interactive dropdown menu to `.TXT`, `.PDF`, or `.DOCX`.
